@@ -2,3 +2,5 @@ __pycache__
 venv/
 .env
 test_cal.py
+versions/
+alembic.ini
