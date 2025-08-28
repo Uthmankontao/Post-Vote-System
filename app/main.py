@@ -3,11 +3,21 @@ from . import models
 from .database import engine
 from .routers import post, user, auth, vote
 from .config import settings
+from fastapi.middleware.cors import CORSMiddleware
 
-
-models.Base.metadata.create_all(bind=engine) # crée la table dans la base si elle n'existe pas sinon elle va juste la loader
-
+# models.Base.metadata.create_all(bind=engine) # crée la table dans la base si elle n'existe pas sinon elle va juste la loader
+# maintenant on utilise alembic pour faire les migrations donc plus besoin de lui 
 app = FastAPI()
+
+
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/')
 def root():
